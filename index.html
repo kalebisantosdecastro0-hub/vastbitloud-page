@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8" />
+<title>VastBitLoud</title>
+
+<style>
+  body {
+    font-family: Arial, sans-serif;
+    background: #e8ecf1;
+    padding: 20px;
+  }
+
+  .card {
+    background: white;
+    padding: 22px;
+    border-radius: 14px;
+    max-width: 480px;
+    margin: auto;
+    box-shadow: 0 3px 12px rgba(0,0,0,0.15);
+  }
+
+  h2 {
+    margin: 0 0 12px 0;
+    font-size: 23px;
+    font-weight: 700;
+    color: #000;
+  }
+
+  input {
+    width: 100%;
+    padding: 14px;
+    border-radius: 10px;
+    border: 2px solid #0044ff;
+    font-size: 18px;
+    margin-top: 10px;
+    font-weight: bold;
+    background: #f8fafc;
+  }
+
+  button {
+    width: 100%;
+    background: #000;
+    color: white;
+    padding: 14px;
+    border-radius: 10px;
+    border: none;
+    margin-top: 15px;
+    font-size: 18px;
+    cursor: pointer;
+    font-weight: bold;
+  }
+
+  button:active {
+    transform: scale(0.97);
+  }
+</style>
+</head>
+
+<body>
+
+<div class="card">
+  <h2>Seu Código Exclusivo</h2>
+  <input id="code" readonly />
+  <button onclick="copyNow()">COPIAR CÓDIGO</button>
+</div>
+
+<script>
+// --- GERA CÓDIGO ÚNICO REAL ---
+function gerarCodigoReal(){
+  let base = "VAST";
+  let random1 = Math.random().toString(36).substring(2,6).toUpperCase();
+  let random2 = Date.now().toString().slice(-5);
+  let finalCode = base + "-" + random1 + "-" + random2;
+
+  document.getElementById('code').value = finalCode;
+}
+
+// --- BOTÃO COPIAR FUNCIONANDO NO GOOGLE SITES ---
+function copyNow(){
+  let text = document.getElementById('code').value;
+
+  navigator.clipboard.writeText(text).then(() => {
+    alert("Código copiado com sucesso!");
+  }).catch(err => {
+    alert("Erro ao copiar o código");
+  });
+}
+
+gerarCodigoReal();
+</script>
+
+</body>
+</html>
