@@ -1,234 +1,94 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Equipe</title>
-
-    <style>
-        body {
-            background: linear-gradient(to right, #0a0f1a, #0d1b2a);
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-        }
-
-        .topbar {
-            background: #0d47a1;
-            color: white;
-            padding: 15px;
-            font-size: 20px;
-            font-weight: bold;
-            display: flex;
-            align-items: center;
-        }
-
-        .topbar span {
-            margin-left: 10px;
-        }
-
-        .container {
-            width: 92%;
-            max-width: 450px;
-            margin: auto;
-            margin-top: 20px;
-        }
-
-        .card {
-            background: #101820;
-            border-left: 5px solid #0d47a1;
-            border-radius: 12px;
-            padding: 18px;
-            margin-bottom: 20px;
-            color: #d6e4ff;
-            box-shadow: 0 3px 10px rgba(0,0,0,0.4);
-        }
-
-        .card h3 {
-            margin-top: 5px;
-            font-size: 18px;
-            color: #82b1ff;
-        }
-
-        .grid-2 {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 15px;
-        }
-
-        .small-card {
-            background: #121b29;
-            border-radius: 10px;
-            padding: 15px;
-            color: #d6e4ff;
-            text-align: center;
-            border: 1px solid #0d47a1;
-        }
-
-        .small-card p {
-            margin: 4px 0;
-            font-size: 14px;
-        }
-
-        .input-box {
-            background: #0a0f1a;
-            border: 1px solid #0d47a1;
-            border-radius: 8px;
-            padding: 10px;
-            width: 100%;
-            color: #82b1ff;
-        }
-
-        .btn {
-            background: #0d47a1;
-            border: none;
-            width: 100%;
-            padding: 12px;
-            border-radius: 8px;
-            margin-top: 10px;
-            font-size: 16px;
-            color: white;
-            cursor: pointer;
-            font-weight: bold;
-        }
-
-        .btn:hover {
-            background: #1565c0;
-        }
-
-        .share-buttons {
-            display: flex;
-            justify-content: space-around;
-            margin-top: 12px;
-        }
-
-        .share-buttons button {
-            background: #121b29;
-            border: 1px solid #0d47a1;
-            width: 50px;
-            height: 50px;
-            border-radius: 10px;
-            color: #82b1ff;
-            font-size: 22px;
-            cursor: pointer;
-        }
-
-        .footer-btn {
-            background: #0d47a1;
-            padding: 12px;
-            border-radius: 8px;
-            color: white;
-            text-align: center;
-            font-weight: bold;
-            margin-top: 20px;
-        }
-    </style>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>Vastbitloud — Código Funcional</title>
+<style>
+  :root{--blue:#1e3a8a;--bg:#0b0f19;--card:#0d1b2a;--muted:#cbd5e1}
+  body{font-family:Arial,Helvetica,sans-serif;background:linear-gradient(90deg,#0a0f1a,#0d1b2a);color:#fff;margin:0;padding:28px;min-height:100vh;display:flex;align-items:center;justify-content:center}
+  .card{background:var(--card);border:2px solid var(--blue);padding:26px;border-radius:14px;max-width:560px;width:100%;box-shadow:0 8px 30px rgba(0,0,0,0.5)}
+  h1{color:#60a5fa;margin:0 0 10px;font-size:20px;text-align:center}
+  label{display:block;color:var(--muted);font-weight:600;margin-top:12px;font-size:13px}
+  input{width:100%;padding:12px;border-radius:10px;border:2px solid var(--blue);background:#142134;color:#fff;font-weight:700;font-size:15px;margin-top:8px;box-sizing:border-box}
+  .row{display:flex;gap:10px;margin-top:16px}
+  .btn{flex:1;background:#000;border:none;color:#fff;padding:12px;border-radius:10px;font-weight:800;cursor:pointer;font-size:15px}
+  .btn.secondary{background:var(--blue)}
+  .small{font-size:13px;color:#9aa6bf;text-align:center;margin-top:12px}
+</style>
 </head>
-
 <body>
+  <div class="card" role="main">
+    <h1>VASTBITLOUD — Código & Link</h1>
 
-    <div class="topbar">← <span>Equipe</span></div>
+    <label>Código único</label>
+    <input id="code" readonly aria-readonly="true"/>
 
-    <div class="container">
+    <label>Link automático</label>
+    <input id="link" readonly aria-readonly="true"/>
 
-        <div class="grid-2">
-            <div class="small-card">
-                <h3>0</h3>
-                <p>Total de Membros</p>
-            </div>
-
-            <div class="small-card">
-                <h3>0</h3>
-                <p>Membros Ativos</p>
-            </div>
-
-            <div class="small-card">
-                <h3>0</h3>
-                <p>Membros Inativos</p>
-            </div>
-
-            <div class="small-card">
-                <h3>0%</h3>
-                <p>Taxa de Ativação</p>
-            </div>
-        </div>
-
-        <div class="card">
-            <h3>Seu Link de Convite</h3>
-
-            <input id="inviteLink" class="input-box" value="https://w4app.xyz/register?ref=72">
-
-            <button class="btn" onclick="copyLink()">Copiar Link</button>
-
-            <p style="margin-top:10px;">Compartilhar em:</p>
-
-            <div class="share-buttons">
-                <button onclick="shareWhatsApp()">🟢</button>
-                <button onclick="shareFacebook()">🔵</button>
-                <button onclick="shareInstagram()">🟣</button>
-                <button onclick="shareTelegram()">🔵</button>
-            </div>
-        </div>
-
-        <div class="grid-2" style="grid-template-columns: repeat(3,1fr); gap:15px;">
-            <div class="small-card">
-                <h3>Nível 1</h3>
-                <p>0 Membros</p>
-                <p>16%</p>
-            </div>
-
-            <div class="small-card">
-                <h3>Nível 2</h3>
-                <p>0 Membros</p>
-                <p>5%</p>
-            </div>
-
-            <div class="small-card">
-                <h3>Nível 3</h3>
-                <p>0 Membros</p>
-                <p>3%</p>
-            </div>
-        </div>
-
-        <div class="card">
-            <h3>Comissões Recebidas</h3>
-            <h2 style="color:#82b1ff;">R$ 0,00</h2>
-
-            <p>Nível 1: R$ 0,00</p>
-            <p>Nível 2: R$ 0,00</p>
-            <p>Nível 3: R$ 0,00</p>
-        </div>
-
-        <div class="footer-btn">Ver Membros da Equipe</div>
-
+    <div class="row">
+      <button id="copyCodeBtn" class="btn">COPIAR CÓDIGO</button>
+      <button id="copyLinkBtn" class="btn secondary">COPIAR LINK</button>
     </div>
 
-    <script>
-        function copyLink() {
-            let link = document.getElementById("inviteLink").value;
-            navigator.clipboard.writeText(link);
-            alert("Link copiado!");
-        }
+    <div class="row" style="margin-top:12px">
+      <button id="regenBtn" class="btn secondary">GERAR NOVO</button>
+    </div>
 
-        function shareWhatsApp() {
-            let link = document.getElementById("inviteLink").value;
-            window.open("https://api.whatsapp.com/send?text=" + encodeURIComponent(link));
-        }
+    <div class="small">Se for usar no Google Sites, incorpore **por URL** (Inserir → Incorporar → Colar URL do GitHub Pages).</div>
+  </div>
 
-        function shareFacebook() {
-            let link = document.getElementById("inviteLink").value;
-            window.open("https://www.facebook.com/sharer/sharer.php?u=" + encodeURIComponent(link));
-        }
+<script>
+(function(){
+  const codeEl = document.getElementById('code');
+  const linkEl = document.getElementById('link');
+  const base = "https://sites.google.com/view/vastbitloud";
 
-        function shareInstagram() {
-            alert("O Instagram não permite compartilhamento direto por link. Copie o link!");
-        }
+  function gerar(){
+    const a = Math.random().toString(36).substring(2,6).toUpperCase();
+    const b = Date.now().toString().slice(-5);
+    const id = "VAST-" + a + "-" + b;
+    codeEl.value = id;
+    linkEl.value = base + "?ref=" + encodeURIComponent(id);
+  }
 
-        function shareTelegram() {
-            let link = document.getElementById("inviteLink").value;
-            window.open("https://t.me/share/url?url=" + encodeURIComponent(link));
-        }
-    </script>
+  async function copyText(text){
+    try{
+      if(navigator.clipboard && window.isSecureContext){
+        await navigator.clipboard.writeText(text);
+        return true;
+      }
+      const tmp = document.createElement('textarea');
+      tmp.value = text;
+      tmp.style.position = 'fixed';
+      tmp.style.left = '-9999px';
+      document.body.appendChild(tmp);
+      tmp.select();
+      document.execCommand('copy');
+      document.body.removeChild(tmp);
+      return true;
+    }catch(e){
+      console.error('Copy error', e);
+      return false;
+    }
+  }
 
+  document.getElementById('copyCodeBtn').addEventListener('click', async ()=>{
+    const ok = await copyText(codeEl.value);
+    alert(ok ? 'Código copiado!' : 'Erro ao copiar. Abra a página direta e tente.');
+  });
+
+  document.getElementById('copyLinkBtn').addEventListener('click', async ()=>{
+    const ok = await copyText(linkEl.value);
+    alert(ok ? 'Link copiado!' : 'Erro ao copiar. Abra a página direta e tente.');
+  });
+
+  document.getElementById('regenBtn').addEventListener('click', gerar);
+
+  // generate on load
+  gerar();
+})();
+</script>
 </body>
 </html>
