@@ -109,7 +109,7 @@
             height: 50px;
             border-radius: 10px;
             color: #82b1ff;
-            font-size: 18px;
+            font-size: 22px;
             cursor: pointer;
         }
 
@@ -127,9 +127,7 @@
 
 <body>
 
-    <div class="topbar">
-        ← <span>Equipe</span>
-    </div>
+    <div class="topbar">← <span>Equipe</span></div>
 
     <div class="container">
 
@@ -157,20 +155,22 @@
 
         <div class="card">
             <h3>Seu Link de Convite</h3>
-            <input class="input-box" value="https://w4app.xyz/register?ref=72">
-            <button class="btn">Copiar Link</button>
+
+            <input id="inviteLink" class="input-box" value="https://w4app.xyz/register?ref=72">
+
+            <button class="btn" onclick="copyLink()">Copiar Link</button>
 
             <p style="margin-top:10px;">Compartilhar em:</p>
 
             <div class="share-buttons">
-                <button>🟢</button>
-                <button>🔵</button>
-                <button>🟣</button>
-                <button>🔵</button>
+                <button onclick="shareWhatsApp()">🟢</button>
+                <button onclick="shareFacebook()">🔵</button>
+                <button onclick="shareInstagram()">🟣</button>
+                <button onclick="shareTelegram()">🔵</button>
             </div>
         </div>
 
-        <div class="grid-3 grid-2" style="grid-template-columns: repeat(3,1fr); gap:15px;">
+        <div class="grid-2" style="grid-template-columns: repeat(3,1fr); gap:15px;">
             <div class="small-card">
                 <h3>Nível 1</h3>
                 <p>0 Membros</p>
@@ -202,6 +202,33 @@
         <div class="footer-btn">Ver Membros da Equipe</div>
 
     </div>
+
+    <script>
+        function copyLink() {
+            let link = document.getElementById("inviteLink").value;
+            navigator.clipboard.writeText(link);
+            alert("Link copiado!");
+        }
+
+        function shareWhatsApp() {
+            let link = document.getElementById("inviteLink").value;
+            window.open("https://api.whatsapp.com/send?text=" + encodeURIComponent(link));
+        }
+
+        function shareFacebook() {
+            let link = document.getElementById("inviteLink").value;
+            window.open("https://www.facebook.com/sharer/sharer.php?u=" + encodeURIComponent(link));
+        }
+
+        function shareInstagram() {
+            alert("O Instagram não permite compartilhamento direto por link. Copie o link!");
+        }
+
+        function shareTelegram() {
+            let link = document.getElementById("inviteLink").value;
+            window.open("https://t.me/share/url?url=" + encodeURIComponent(link));
+        }
+    </script>
 
 </body>
 </html>
