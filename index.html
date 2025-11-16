@@ -1,94 +1,207 @@
 <!DOCTYPE html>
-<html>
+<html lang="pt-BR">
 <head>
-<meta charset="UTF-8" />
-<title>VastBitLoud</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Equipe</title>
 
-<style>
-  body {
-    font-family: Arial, sans-serif;
-    background: #e8ecf1;
-    padding: 20px;
-  }
+    <style>
+        body {
+            background: linear-gradient(to right, #0a0f1a, #0d1b2a);
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
 
-  .card {
-    background: white;
-    padding: 22px;
-    border-radius: 14px;
-    max-width: 480px;
-    margin: auto;
-    box-shadow: 0 3px 12px rgba(0,0,0,0.15);
-  }
+        .topbar {
+            background: #0d47a1;
+            color: white;
+            padding: 15px;
+            font-size: 20px;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+        }
 
-  h2 {
-    margin: 0 0 12px 0;
-    font-size: 23px;
-    font-weight: 700;
-    color: #000;
-  }
+        .topbar span {
+            margin-left: 10px;
+        }
 
-  input {
-    width: 100%;
-    padding: 14px;
-    border-radius: 10px;
-    border: 2px solid #0044ff;
-    font-size: 18px;
-    margin-top: 10px;
-    font-weight: bold;
-    background: #f8fafc;
-  }
+        .container {
+            width: 92%;
+            max-width: 450px;
+            margin: auto;
+            margin-top: 20px;
+        }
 
-  button {
-    width: 100%;
-    background: #000;
-    color: white;
-    padding: 14px;
-    border-radius: 10px;
-    border: none;
-    margin-top: 15px;
-    font-size: 18px;
-    cursor: pointer;
-    font-weight: bold;
-  }
+        .card {
+            background: #101820;
+            border-left: 5px solid #0d47a1;
+            border-radius: 12px;
+            padding: 18px;
+            margin-bottom: 20px;
+            color: #d6e4ff;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.4);
+        }
 
-  button:active {
-    transform: scale(0.97);
-  }
-</style>
+        .card h3 {
+            margin-top: 5px;
+            font-size: 18px;
+            color: #82b1ff;
+        }
+
+        .grid-2 {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+        }
+
+        .small-card {
+            background: #121b29;
+            border-radius: 10px;
+            padding: 15px;
+            color: #d6e4ff;
+            text-align: center;
+            border: 1px solid #0d47a1;
+        }
+
+        .small-card p {
+            margin: 4px 0;
+            font-size: 14px;
+        }
+
+        .input-box {
+            background: #0a0f1a;
+            border: 1px solid #0d47a1;
+            border-radius: 8px;
+            padding: 10px;
+            width: 100%;
+            color: #82b1ff;
+        }
+
+        .btn {
+            background: #0d47a1;
+            border: none;
+            width: 100%;
+            padding: 12px;
+            border-radius: 8px;
+            margin-top: 10px;
+            font-size: 16px;
+            color: white;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        .btn:hover {
+            background: #1565c0;
+        }
+
+        .share-buttons {
+            display: flex;
+            justify-content: space-around;
+            margin-top: 12px;
+        }
+
+        .share-buttons button {
+            background: #121b29;
+            border: 1px solid #0d47a1;
+            width: 50px;
+            height: 50px;
+            border-radius: 10px;
+            color: #82b1ff;
+            font-size: 18px;
+            cursor: pointer;
+        }
+
+        .footer-btn {
+            background: #0d47a1;
+            padding: 12px;
+            border-radius: 8px;
+            color: white;
+            text-align: center;
+            font-weight: bold;
+            margin-top: 20px;
+        }
+    </style>
 </head>
 
 <body>
 
-<div class="card">
-  <h2>Seu Código Exclusivo</h2>
-  <input id="code" readonly />
-  <button onclick="copyNow()">COPIAR CÓDIGO</button>
-</div>
+    <div class="topbar">
+        ← <span>Equipe</span>
+    </div>
 
-<script>
-// --- GERA CÓDIGO ÚNICO REAL ---
-function gerarCodigoReal(){
-  let base = "VAST";
-  let random1 = Math.random().toString(36).substring(2,6).toUpperCase();
-  let random2 = Date.now().toString().slice(-5);
-  let finalCode = base + "-" + random1 + "-" + random2;
+    <div class="container">
 
-  document.getElementById('code').value = finalCode;
-}
+        <div class="grid-2">
+            <div class="small-card">
+                <h3>0</h3>
+                <p>Total de Membros</p>
+            </div>
 
-// --- BOTÃO COPIAR FUNCIONANDO NO GOOGLE SITES ---
-function copyNow(){
-  let text = document.getElementById('code').value;
+            <div class="small-card">
+                <h3>0</h3>
+                <p>Membros Ativos</p>
+            </div>
 
-  navigator.clipboard.writeText(text).then(() => {
-    alert("Código copiado com sucesso!");
-  }).catch(err => {
-    alert("Erro ao copiar o código");
-  });
-}
+            <div class="small-card">
+                <h3>0</h3>
+                <p>Membros Inativos</p>
+            </div>
 
-gerarCodigoReal();
-</script>
+            <div class="small-card">
+                <h3>0%</h3>
+                <p>Taxa de Ativação</p>
+            </div>
+        </div>
+
+        <div class="card">
+            <h3>Seu Link de Convite</h3>
+            <input class="input-box" value="https://w4app.xyz/register?ref=72">
+            <button class="btn">Copiar Link</button>
+
+            <p style="margin-top:10px;">Compartilhar em:</p>
+
+            <div class="share-buttons">
+                <button>🟢</button>
+                <button>🔵</button>
+                <button>🟣</button>
+                <button>🔵</button>
+            </div>
+        </div>
+
+        <div class="grid-3 grid-2" style="grid-template-columns: repeat(3,1fr); gap:15px;">
+            <div class="small-card">
+                <h3>Nível 1</h3>
+                <p>0 Membros</p>
+                <p>16%</p>
+            </div>
+
+            <div class="small-card">
+                <h3>Nível 2</h3>
+                <p>0 Membros</p>
+                <p>5%</p>
+            </div>
+
+            <div class="small-card">
+                <h3>Nível 3</h3>
+                <p>0 Membros</p>
+                <p>3%</p>
+            </div>
+        </div>
+
+        <div class="card">
+            <h3>Comissões Recebidas</h3>
+            <h2 style="color:#82b1ff;">R$ 0,00</h2>
+
+            <p>Nível 1: R$ 0,00</p>
+            <p>Nível 2: R$ 0,00</p>
+            <p>Nível 3: R$ 0,00</p>
+        </div>
+
+        <div class="footer-btn">Ver Membros da Equipe</div>
+
+    </div>
 
 </body>
 </html>
