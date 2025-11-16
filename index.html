@@ -4,6 +4,7 @@
 <meta charset="utf-8"/>
 <meta name="viewport" content="width=device-width,initial-scale=1"/>
 <title>Vastbitloud — Código Funcional</title>
+
 <style>
   :root{--blue:#1e3a8a;--bg:#0b0f19;--card:#0d1b2a;--muted:#cbd5e1}
   body{font-family:Arial,Helvetica,sans-serif;background:linear-gradient(90deg,#0a0f1a,#0d1b2a);color:#fff;margin:0;padding:28px;min-height:100vh;display:flex;align-items:center;justify-content:center}
@@ -17,77 +18,67 @@
   .small{font-size:13px;color:#9aa6bf;text-align:center;margin-top:12px}
 </style>
 </head>
+
 <body>
-  <div class="card" role="main">
+  <div class="card">
     <h1>VASTBITLOUD — Código & Link</h1>
 
-    <label>Código único</label>
-    <input id="code" readonly aria-readonly="true"/>
+    <label>Código fixo do usuário</label>
+    <input id="code" readonly/>
 
-    <label>Link automático</label>
-    <input id="link" readonly aria-readonly="true"/>
+    <label>Link exclusivo</label>
+    <input id="link" readonly/>
 
     <div class="row">
       <button id="copyCodeBtn" class="btn">COPIAR CÓDIGO</button>
       <button id="copyLinkBtn" class="btn secondary">COPIAR LINK</button>
     </div>
 
-    <div class="row" style="margin-top:12px">
-      <button id="regenBtn" class="btn secondary">GERAR NOVO</button>
-    </div>
-
-    <div class="small">Se for usar no Google Sites, incorpore **por URL** (Inserir → Incorporar → Colar URL do GitHub Pages).</div>
+    <div class="small">Seu código e link são únicos e permanecem salvos neste dispositivo.</div>
   </div>
 
 <script>
 (function(){
-  const codeEl = document.getElementById('code');
-  const linkEl = document.getElementById('link');
+  const codeEl = document.getElementById("code");
+  const linkEl = document.getElementById("link");
   const base = "https://sites.google.com/view/vastbitloud";
 
-  function gerar(){
-    const a = Math.random().toString(36).substring(2,6).toUpperCase();
-    const b = Date.now().toString().slice(-5);
-    const id = "VAST-" + a + "-" + b;
-    codeEl.value = id;
-    linkEl.value = base + "?ref=" + encodeURIComponent(id);
+  // --- VERIFICAR SE JÁ EXISTE CÓDIGO SALVO ---
+  let codigoSalvo = localStorage.getItem("vast_cod_exclusivo");
+
+  // --- SE NÃO EXISTE, CRIA UM NOVO ---
+  if(!codigoSalvo){
+      const a = Math.random().toString(36).substring(2,6).toUpperCase();
+      const b = Date.now().toString().slice(-5);
+      codigoSalvo = "VAST-" + a + "-" + b;
+
+      // SALVA PARA SEMPRE NO NAVEGADOR
+      localStorage.setItem("vast_cod_exclusivo", codigoSalvo);
   }
 
-  async function copyText(text){
+  // MOSTRAR O CÓDIGO
+  codeEl.value = codigoSalvo;
+
+  // GERAR LINK EXCLUSIVO
+  linkEl.value = base + "?ref=" + encodeURIComponent(codigoSalvo);
+
+  // COPIAR
+  async function copiar(text){
     try{
-      if(navigator.clipboard && window.isSecureContext){
-        await navigator.clipboard.writeText(text);
-        return true;
-      }
-      const tmp = document.createElement('textarea');
-      tmp.value = text;
-      tmp.style.position = 'fixed';
-      tmp.style.left = '-9999px';
-      document.body.appendChild(tmp);
-      tmp.select();
-      document.execCommand('copy');
-      document.body.removeChild(tmp);
+      await navigator.clipboard.writeText(text);
       return true;
     }catch(e){
-      console.error('Copy error', e);
       return false;
     }
   }
 
-  document.getElementById('copyCodeBtn').addEventListener('click', async ()=>{
-    const ok = await copyText(codeEl.value);
-    alert(ok ? 'Código copiado!' : 'Erro ao copiar. Abra a página direta e tente.');
-  });
+  document.getElementById("copyCodeBtn").onclick = async ()=>{
+    alert((await copiar(codeEl.value)) ? "Código copiado!" : "Erro ao copiar.");
+  };
 
-  document.getElementById('copyLinkBtn').addEventListener('click', async ()=>{
-    const ok = await copyText(linkEl.value);
-    alert(ok ? 'Link copiado!' : 'Erro ao copiar. Abra a página direta e tente.');
-  });
-
-  document.getElementById('regenBtn').addEventListener('click', gerar);
-
-  // generate on load
-  gerar();
+  document.getElementById("copyLinkBtn").onclick = async ()=>{
+    alert((await copiar(linkEl.value)) ? "Link copiado!" : "Erro ao copiar.");
+  };
 })();
 </script>
 </body>
